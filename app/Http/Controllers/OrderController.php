@@ -111,6 +111,7 @@ class OrderController extends Controller
         $user = auth('api')->user();
         $orders = Order::where('user_id', $user->id)
             ->with('items.product', 'payment')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return response()->json($orders);
